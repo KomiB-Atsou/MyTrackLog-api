@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const CONNECTION_STRING = `mongodb://localhost:27017/tracklogs`;
+const CONNECTION_STRING = `mongodb://localhost:27017/mytracklog`;
 
 module.exports = () => {
     mongoose.connect(CONNECTION_STRING, {
