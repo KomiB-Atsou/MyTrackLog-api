@@ -14,7 +14,8 @@ module.exports = {
             description: data.description,
             startedAt: data.startedAt,
             finishedAt: data.finishedAt,
-            duration: data.duration
+            duration: data.duration,
+            categoryId: data.categoryId
         });
         return t ? t : false;
     },

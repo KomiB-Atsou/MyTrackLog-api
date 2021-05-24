@@ -33,6 +33,7 @@ router.post('/all', async (req, res) => {
         t = t.map(x => {
             return {
                 _id: x._id,
+                categoryId: x.categoryId,
                 title: `${x.label} | ${moment(x.startedAt).format('HH:mm')}-${moment(x.finishedAt).format('HH:mm')} | ${getHoursMinutesFormat(x.duration)}`,
                 start: moment(x.startedAt).toDate(),
                 end: moment(x.finishedAt).toDate(),
@@ -47,24 +48,6 @@ router.post('/all', async (req, res) => {
         };
 
         return res.status(200).send(result);
-        // let t = await taskManager.list(categoryId);
-        // t = t.map(x => {
-        //     return {
-        //         _id: x._id,
-        //         title: `${x.label} | ${moment(x.startedAt).format('HH:mm')}-${moment(x.finishedAt).format('HH:mm')} | ${getHoursMinutesFormat(x.duration)}`,
-        //         start: moment(x.startedAt).toDate(),
-        //         end: moment(x.finishedAt).toDate(),
-        //         description: x.description,
-        //         duration: x.duration
-        //     };
-        // });
-        //
-        // const result = {
-        //   tasks: t,
-        //   duration: t.reduce((a, b) => a + b.duration, 0)
-        // };
-        //
-        // return res.status(200).send(result);
     } catch (ex) {
         return res.status(500).send(ex.message);
     }

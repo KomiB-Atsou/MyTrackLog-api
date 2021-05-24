@@ -64,6 +64,22 @@ router.post('/all', async (req, res) => {
     }
 });
 
+router.post('/all-flat', async (req, res) => {
+    try {
+        const keyword = req.body.keyword || ``;
+        let categories = await categoryManager.list(keyword);
+        categories = categories.map(x => {
+            return {
+                value: x._id,
+                name: x.label
+            };
+        });
+        return res.status(200).send(categories);
+    } catch (ex) {
+        return res.status(500).send(ex.message);
+    }
+});
+
 router.post('/', async (req, res) => {
     try {
         const t = await categoryManager.create(req.body);
