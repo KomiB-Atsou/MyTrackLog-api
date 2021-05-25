@@ -10,6 +10,7 @@ function getChildrenRecursive(arr) {
         if(children.length === 0) {
             result.push({
                 label: current.label,
+                value: current._id,
                 dateCreated: current.dateCreated,
                 dateUpdated: current.dateUpdated,
                 _id: current._id,
@@ -19,6 +20,7 @@ function getChildrenRecursive(arr) {
         } else {
             result.push({
                 label: current.label,
+                value: current._id,
                 dateCreated: current.dateCreated,
                 dateUpdated: current.dateUpdated,
                 _id: current._id,
@@ -81,6 +83,8 @@ router.post('/all-flat', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+    
+    console.log('req.body : ',req.body);
     try {
         const t = await categoryManager.create(req.body);
         return res.status(200).send(t);
@@ -103,6 +107,7 @@ router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const category = await categoryManager.get(id);
+        console.log('test : ', category);
         allCategories = await categoryManager.list("");
         const tree = getParentsRecursiveLabels(category);
 
